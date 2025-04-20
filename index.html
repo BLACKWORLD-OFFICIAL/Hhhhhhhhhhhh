@@ -8,6 +8,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Bilbo&family=Bonheur+Royale&family=Foldit&family=Grape+Nuts&family=Iceberg&family=Neonderthaw&family=Stick+No+Bills&display=swap');
 
     body {
+      font-family: Arial, sans-serif;
       background: linear-gradient(90deg, #141e30, #243b55);
       background-size: 400% 400%;
       animation: backgroundAnimate 8s infinite;
@@ -39,7 +40,7 @@
 
     h1 {
       font-family: 'Bilbo', cursive;
-      font-size: 32px;
+      font-size: 38px;
       margin-bottom: 20px;
       text-shadow: 0 0 10px rgba(255,255,255,0.8);
     }
@@ -84,6 +85,10 @@
       white-space: pre-line;
       display: none;
       font-family: 'Foldit', cursive;
+    }
+
+    .result .plain {
+      font-family: sans-serif !important;
     }
 
     .share-btn {
@@ -150,7 +155,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>𝗣𝗮𝗸 𝗦𝗶𝗺 𝗗𝗮𝘁𝗮</h1>
+    <h1>PAK SIM DATA</h1>
     <input type="text" id="number" placeholder="Enter mobile number" required />
     <button onclick="fetchData()">Search</button>
     <div id="responseBox" class="result"></div>
@@ -191,13 +196,13 @@
         if (apiData.status === "success" && Array.isArray(apiData.data) && apiData.data.length > 0) {
           const user = apiData.data[0];
           const content = `
-📞 Mobile: ${user.Mobile || "Not found -contact us 923058190234"}
+📞 Mobile: <span class="plain">${user.Mobile || "Not found -contact us 923058190234"}</span>
 👤 Name: ${user.Name || "Not found - contact us 923058190234 "}
-🆔 CNIC: ${user.CNIC || "Not found-contact us 923058190234"}
+🆔 CNIC: <span class="plain">${user.CNIC || "Not found-contact us 923058190234"}</span>
 📍 Address: ${user.Address || "Not found- contact us 923058190234"}
 📶 Operator: ${user.Operator || "Not found- contact us 923058190234"}
           `;
-          responseBox.innerText = content;
+          responseBox.innerHTML = content;
           responseBox.style.display = "block";
           shareButton.style.display = "inline-block";
         } else {
