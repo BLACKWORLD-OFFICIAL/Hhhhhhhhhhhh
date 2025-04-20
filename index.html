@@ -1,52 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pak Sim Data</title>
-  <!-- Google Fonts CDN (Original) -->
-  <link href="https://fonts.googleapis.com/css2?family=Overthrow+Oligarchy&family=Sport+Game&family=Super+Guardian&family=Outfielder&family=Task+Force&family=Esportiva&display=swap" rel="stylesheet">
   <style>
-    /* Font Assignments (Exactly as Before) */
-    h1 { font-family: 'Overthrow Oligarchy', fantasy; }
-    button { font-family: 'Super Guardian', fantasy; }
-    .developer span { font-family: 'Sport Game', fantasy; }
-    .social-links a { font-family: 'Super Guardian', fantasy; }
-    .footer h2 { font-family: 'Outfielder', fantasy; }
-    .result { font-family: 'Task Force', monospace; }
-    .share-btn { font-family: 'Esportiva', cursive; }
+    /* Font Imports */
+    @font-face {
+      font-family: 'SportGame';
+      src: url('https://dl.dafont.com/dl/?f=sport_game') format('woff2');
+    }
     
-    /* Rest of your original CSS */
+    @font-face {
+      font-family: 'OverthrowOligarchy';
+      src: url('https://dl.dafont.com/dl/?f=overthrow_oligarchy') format('woff2');
+    }
+    
+    @font-face {
+      font-family: 'Gamesome';
+      src: url('https://dl.dafont.com/dl/?f=gamesome') format('woff2');
+    }
+    
+    @font-face {
+      font-family: 'SuperGuardian';
+      src: url('https://dl.dafont.com/dl/?f=super_guardian') format('woff2');
+    }
+    
+    @font-face {
+      font-family: 'Outfielder';
+      src: url('https://dl.dafont.com/dl/?f=outfielder') format('woff2');
+    }
+    
+    @font-face {
+      font-family: 'TaskForce';
+      src: url('https://dl.dafont.com/dl/?f=task_force') format('woff2');
+    }
+    
+    @font-face {
+      font-family: 'Esportiva';
+      src: url('https://dl.dafont.com/dl/?f=esportiva') format('woff2');
+    }
+
     body {
       background: linear-gradient(90deg, #141e30, #243b55);
+      background-size: 400% 400%;
+      animation: backgroundAnimate 8s infinite;
       margin: 0;
       padding: 0;
-      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: white;
+      flex-direction: column;
+      min-height: 100vh;
     }
+
+    @keyframes backgroundAnimate {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .container {
-      background: rgba(0,0,0,0.3);
+      background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
       border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
       padding: 25px;
-      width: 90%;
+      width: 100%;
       max-width: 400px;
       text-align: center;
-      box-shadow: 0 0 30px rgba(0,255,255,0.3);
+      color: white;
     }
-    /* ... (Other CSS unchanged) ... */
+
+    h1 {
+      font-family: 'OverthrowOligarchy';
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 12px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    button {
+      font-family: 'SuperGuardian';
+      background: rgba(255, 0, 0, 0.8);
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      width: 50%;
+      animation: buttonGlow 2s infinite alternate;
+    }
+
+    @keyframes buttonGlow {
+      0% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
+      100% { box-shadow: 0 0 20px rgba(255, 0, 0, 1); }
+    }
+
+    .result {
+      font-family: 'TaskForce';
+      margin-top: 20px;
+      background: rgba(0,0,0,0.7);
+      padding: 20px;
+      border-radius: 15px;
+      font-size: 14px;
+      text-align: left;
+      white-space: pre-line;
+      display: none;
+    }
+
+    .share-btn {
+      font-family: 'Esportiva';
+      margin-top: 10px;
+      background: linear-gradient(90deg, #25D366, #128C7E);
+      box-shadow: 0 0 10px #25D366;
+      color: white;
+      display: none;
+    }
+
+    .footer {
+      margin-top: 50px;
+      padding: 20px;
+      text-align: center;
+      background: #111;
+      box-shadow: 0 -5px 20px #0ff;
+      width: 100%;
+    }
+
+    .footer h2 {
+      font-family: 'Outfielder';
+      font-size: 1.5rem;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff;
+      margin-bottom: 10px;
+    }
+
+    .social-links a {
+      font-family: 'Gamesome';
+      display: inline-block;
+      margin: 5px;
+      padding: 10px 15px;
+      color: #fff;
+      background: #0ff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 15px #0ff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px #0ff;
+      background: #08f;
+    }
+
+    .developer {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: yellow;
+    }
+
+    .developer span {
+      font-family: 'SportGame';
+      display: block;
+      font-size: 1.8rem;
+      color: red;
+      text-shadow: 0 0 10px red, 0 0 20px red;
+      margin-top: 5px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>𝗣𝗮𝗸 𝗦𝗶𝗺 𝗗𝗮𝘁𝗮</h1>
-    <input type="text" id="number" placeholder="Enter mobile number" required>
+    <input type="text" id="number" placeholder="Enter mobile number" required />
     <button onclick="fetchData()">Search</button>
     <div id="responseBox" class="result"></div>
     <button id="shareButton" class="share-btn" onclick="shareWhatsApp()">📲 Share on WhatsApp</button>
   </div>
+
   <div class="footer">
     <h2>Join Our Channels</h2>
     <div class="social-links">
@@ -55,37 +199,58 @@
       <a href="https://wa.me/923058190234" target="_blank">WhatsApp Me</a>
     </div>
     <div class="developer">
-      DEVELOPER: <span>BLACK WORLD OFFICIAL</span>
+      DEVELOPER:
+      <span>BLACK WORLD OFFICIAL</span>
     </div>
   </div>
 
   <script>
-    // Your original JavaScript
     async function fetchData() {
       const number = document.getElementById("number").value.trim();
-      if (!number) return alert("Please enter a phone number.");
-      
+      const responseBox = document.getElementById("responseBox");
+      const shareButton = document.getElementById("shareButton");
+
+      if (!number) {
+        alert("Please enter a phone number.");
+        return;
+      }
+
+      const url = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://fam-official.serv00.net/sim/api.php?num=${number}`)}`;
+
       try {
-        const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://fam-official.serv00.net/sim/api.php?num=${number}`)}`;
-        const res = await fetch(apiUrl);
-        const data = await res.json();
-        const user = JSON.parse(data.contents).data[0];
-        
-        document.getElementById("responseBox").innerHTML = `
-          📞 Mobile: ${user.Mobile || "N/A"}<br>
-          👤 Name: ${user.Name || "N/A"}<br>
-          🆔 CNIC: ${user.CNIC || "N/A"}<br>
-          📍 Address: ${user.Address || "N/A"}<br>
-          📶 Operator: ${user.Operator || "N/A"}
-        `;
+        const res = await fetch(url);
+        const json = await res.json();
+        const apiData = JSON.parse(json.contents);
+
+        if (apiData.status === "success" && Array.isArray(apiData.data) && apiData.data.length > 0) {
+          const user = apiData.data[0];
+          const content = `
+📞 Mobile: ${user.Mobile || "Not found -contact us 923058190234"}
+👤 Name: ${user.Name || "Not found - contact us 923058190234 "}
+🆔 CNIC: ${user.CNIC || "Not found-contact us 923058190234"}
+📍 Address: ${user.Address || "Not found- contact us 923058190234"}
+📶 Operator: ${user.Operator || "Not found- contact us 923058190234"}
+          `;
+          responseBox.innerText = content;
+          responseBox.style.display = "block";
+          shareButton.style.display = "inline-block";
+        } else {
+          responseBox.innerHTML = `<p style="color: yellow;">Data Not Found</p>`;
+          responseBox.style.display = "block";
+          shareButton.style.display = "none";
+        }
       } catch (e) {
-        document.getElementById("responseBox").innerHTML = "Error loading data";
+        responseBox.innerHTML = `<p style="color: red;">Error fetching data.</p>`;
+        responseBox.style.display = "block";
+        shareButton.style.display = "none";
       }
     }
-    
+
     function shareWhatsApp() {
-      const text = encodeURIComponent(document.getElementById("responseBox").innerText);
-      window.open(`https://wa.me/?text=${text}`, '_blank');
+      const responseBox = document.getElementById("responseBox");
+      const text = encodeURIComponent(responseBox.innerText);
+      const url = `https://wa.me/?text=${text}`;
+      window.open(url, '_blank');
     }
   </script>
 </body>
