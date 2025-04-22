@@ -5,10 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pak Sim Data</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bilbo&family=Foldit&family=Neonderthaw&family=Grape+Nuts&family=Iceberg&family=Stick+No+Bills&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bilbo&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Iceberg&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Stick+No+Bills&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bonheur+Royale&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Germania+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Foldit&display=swap');
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Germania One', cursive;
       background: linear-gradient(90deg, #141e30, #243b55);
       background-size: 400% 400%;
       animation: backgroundAnimate 8s infinite;
@@ -66,8 +73,8 @@
       font-size: 16px;
       margin-top: 10px;
       width: 50%;
-      animation: buttonGlow 2s infinite alternate;
       font-family: 'Iceberg', cursive;
+      animation: buttonGlow 2s infinite alternate;
     }
 
     @keyframes buttonGlow {
@@ -84,11 +91,11 @@
       text-align: left;
       white-space: pre-line;
       display: none;
-      font-family: 'Foldit', sans-serif;
+      font-family: 'Foldit', cursive;
     }
 
-    .result span.num {
-      font-family: Arial, sans-serif !important;
+    .result .plain {
+      font-family: Arial, sans-serif;
     }
 
     .share-btn {
@@ -146,6 +153,7 @@
     .developer span {
       display: block;
       font-size: 1.8rem;
+      font-family: 'Bonheur Royale', cursive;
       color: red;
       text-shadow: 0 0 10px red, 0 0 20px red;
       margin-top: 5px;
@@ -154,7 +162,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Pak Sim Data</h1>
+    <h1>PAK SIM DATA</h1>
     <input type="text" id="number" placeholder="Enter mobile number" required />
     <button onclick="fetchData()">Search</button>
     <div id="responseBox" class="result"></div>
@@ -185,20 +193,21 @@
         return;
       }
 
-      const url = `https://fam-official.serv00.net/sim/api.php?num=${number}`;
+      const url = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://paksimdatadevapi.free.nf/simownerdetail.php?phone_number=${number}`)}`;
 
       try {
         const res = await fetch(url);
-        const apiData = await res.json();
+        const json = await res.json();
+        const apiData = JSON.parse(json.contents);
 
         if (apiData.status === "success" && Array.isArray(apiData.data) && apiData.data.length > 0) {
           const user = apiData.data[0];
           const content = `
-📞 Mobile: <span class="num">${user.Mobile || "Not found"}</span>
-👤 Name: ${user.Name || "Not found"}
-🆔 CNIC: <span class="num">${user.CNIC || "Not found"}</span>
-📍 Address: ${user.Address || "Not found"}
-📶 Operator: ${user.Operator || "Not found"}
+📞 Mobile: <span class="plain">${user.Mobile || "Not found - contact us 923058190234"}</span>
+👤 Name: ${user.Name || "Not found - contact us 923058190234"}
+🆔 CNIC: <span class="plain">${user.CNIC || "Not found - contact us 923058190234"}</span>
+📍 Address: ${user.Address || "Not found - contact us 923058190234"}
+📶 Operator: ${user.Operator || "Not found - contact us 923058190234"}
           `;
           responseBox.innerHTML = content;
           responseBox.style.display = "block";
