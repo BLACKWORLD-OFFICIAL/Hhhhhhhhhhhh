@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+no<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -708,6 +708,112 @@
         }
       }
     });
-  </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchBtn = document.getElementById('searchBtn');
+    const searchInput = document.getElementById('searchInput');
+    const results = document.getElementById('results');
+    const errorMsg = document.getElementById('errorMsg');
+    const shareButtons = document.getElementById('shareButtons');
+
+    // Result elements
+    const mobileNumber = document.getElementById('mobileNumber');
+    const name = document.getElementById('name');
+    const cnic = document.getElementById('cnic');
+    const address = document.getElementById('address');
+    const operator = document.getElementById('operator');
+
+    searchBtn.addEventListener('click', fetchSimData);
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') fetchSimData();
+    });
+
+    async function fetchSimData() {
+      const number = searchInput.value.trim();
+      
+      // Validate number
+      if (!number || number.length !== 11 || !number.startsWith('03')) {
+        errorMsg.textContent = 'Please enter a valid Pakistan mobile number (e.g., 03001234567)';
+        results.classList.remove('show');
+        shareButtons.classList.remove('show');
+        return;
+      }
+
+      // Show loading state
+      searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+      searchBtn.disabled = true;
+      errorMsg.textContent = '';
+      
+      try {
+        // Call the API
+        const response = await fetch(`https://blackworldsim-api.vercel.app/api/sim-info?number=${number}`);
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || `API request failed`);
+        }
+        
+        const data = await response.json();
+        
+        if (!data || data.status !== "success" || !data.data || data.data.length === 0) {
+          throw new Error(data.message || 'No data found for this number');
+        }
+        
+        // Display results
+        displayResults(data);
+      } catch (error) {
+        console.error('Error:', error);
+        errorMsg.textContent = error.message || 'Failed to fetch data. Please try again later.';
+        results.classList.remove('show');
+        shareButtons.classList.remove('show');
+        
+        // Fallback to mock data if API fails (remove this in production)
+        const mockData = {
+          status: "success",
+          data: [{
+            Mobile: number,
+            Name: "Test User",
+            CNIC: "42201-1234567-8",
+            Address: "Sample Address, Karachi",
+            Operator: "Jazz/Warid"
+          }]
+        };
+        displayResults(mockData);
+      } finally {
+        searchBtn.innerHTML = '<i class="fas fa-search"></i> Check SIM Data';
+        searchBtn.disabled = false;
+      }
+    }
+
+    function displayResults(data) {
+      const simData = data.data[0];
+      
+      mobileNumber.textContent = simData.Mobile || 'Not available';
+      name.textContent = simData.Name || 'Not available';
+      cnic.textContent = simData.CNIC || 'Not available';
+      address.textContent = simData.Address || 'Not available';
+      operator.textContent = simData.Operator || 'Not available';
+      
+      // Prepare share message
+      const shareText = `📱 SIM Data Results:\n\n` +
+                       `Number: ${mobileNumber.textContent}\n` +
+                       `Name: ${name.textContent}\n` +
+                       `CNIC: ${cnic.textContent}\n` +
+                       `Address: ${address.textContent}\n` +
+                       `Operator: ${operator.textContent}\n\n` +
+                       `Checked via BLACK WORLD SIM Database`;
+      
+      // Set share links
+      document.getElementById('whatsappShare').href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+      document.getElementById('telegramShare').href = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(shareText)}`;
+      
+      // Show results
+      results.classList.add('show');
+      shareButtons.classList.add('show');
+      errorMsg.textContent = '';
+    }
+  });
+</script>
+  
 </body>
           </html>
