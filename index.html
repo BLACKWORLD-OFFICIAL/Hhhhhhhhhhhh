@@ -1,235 +1,713 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pak Sim Data</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLACK WORLD | SIM DATA</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bilbo&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Iceberg&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Stick+No+Bills&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Bonheur+Royale&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Germania+One&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Foldit&display=swap');
+    :root {
+      --primary: #ff4d4d;
+      --secondary: #00f7ff;
+      --dark: #0a0a1a;
+      --light: #f0f0f0;
+      --gradient: linear-gradient(135deg, #ff4d4d 0%, #0066ff 100%);
+    }
 
-    body {
-      font-family: 'Germania One', cursive;
-      background: linear-gradient(90deg, #141e30, #243b55);
-      background-size: 400% 400%;
-      animation: backgroundAnimate 8s infinite;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--dark);
+      color: var(--light);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 77, 77, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(0, 247, 255, 0.1) 0%, transparent 20%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      background: rgba(10, 10, 26, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid rgba(255, 77, 77, 0.3);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .logo-text {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      bottom: -5px;
+      left: 0;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 10rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 77, 77, 0.05) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 2px;
+      animation: fadeInDown 1s ease;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      opacity: 0.9;
+      animation: fadeIn 1.5s ease;
+    }
+
+    /* Search Box */
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 77, 77, 0.2);
+      animation: fadeInUp 1s ease;
+    }
+
+    .search-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      border: none;
+      border-radius: 50px;
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--light);
+      font-size: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary);
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      background: var(--gradient);
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 77, 77, 0.6);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    /* Results Section */
+    .results {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 247, 255, 0.2);
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .results.show {
+      display: block;
+    }
+
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .result-item:last-child {
+      border-bottom: none;
+    }
+
+    .result-label {
+      font-weight: 600;
+      color: var(--secondary);
+      min-width: 120px;
+    }
+
+    .result-value {
+      flex: 1;
+      text-align: right;
+      word-break: break-all;
+    }
+
+    .error-message {
+      color: var(--primary);
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+
+    /* Share Buttons */
+    .share-buttons {
       display: flex;
       justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    @keyframes backgroundAnimate {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .container {
-      background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-      border-radius: 15px;
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-      padding: 25px;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-      color: white;
-    }
-
-    h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px rgba(255,255,255,0.8);
-      font-family: 'Bilbo', cursive;
-    }
-
-    input[type="text"] {
-      width: 80%;
-      padding: 12px;
-      border: 2px solid #fff;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.1);
-      color: white;
-      margin: 10px 0;
-      font-size: 16px;
-    }
-
-    button {
-      background: rgba(255, 0, 0, 0.8);
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
-      width: 50%;
-      font-family: 'Iceberg', cursive;
-      animation: buttonGlow 2s infinite alternate;
-    }
-
-    @keyframes buttonGlow {
-      0% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
-      100% { box-shadow: 0 0 20px rgba(255, 0, 0, 1); }
-    }
-
-    .result {
-      margin-top: 20px;
-      background: rgba(0,0,0,0.7);
-      padding: 20px;
-      border-radius: 15px;
-      font-size: 14px;
-      text-align: left;
-      white-space: pre-line;
+      gap: 1rem;
+      margin-top: 2rem;
       display: none;
-      font-family: 'Foldit', cursive;
     }
 
-    .result .plain {
-      font-family: Arial, sans-serif;
+    .share-buttons.show {
+      display: flex;
     }
 
     .share-btn {
-      margin-top: 10px;
-      background: linear-gradient(90deg, #25D366, #128C7E);
-      box-shadow: 0 0 10px #25D366;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-btn {
+      background: #25D366;
       color: white;
-      display: none;
-      font-family: 'Stick No Bills', sans-serif;
     }
 
-    .footer {
-      margin-top: 50px;
-      padding: 20px;
-      text-align: center;
-      background: #111;
-      box-shadow: 0 -5px 20px #0ff;
+    .telegram-btn {
+      background: #0088cc;
+      color: white;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 5rem 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .features::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+      opacity: 0.1;
+      z-index: -1;
     }
 
-    .footer h2 {
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      border-color: var(--primary);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .feature-title {
       font-size: 1.5rem;
-      color: #0ff;
-      text-shadow: 0 0 10px #0ff;
-      margin-bottom: 10px;
-      font-family: 'Neonderthaw', cursive;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+
+    .feature-desc {
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(10, 10, 26, 0.9);
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(255, 77, 77, 0.3);
+    }
+
+    .footer-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--light);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     .social-links a {
-      display: inline-block;
-      margin: 5px;
-      padding: 10px 15px;
-      color: #fff;
-      background: #0ff;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 15px #0ff;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      font-family: 'Grape Nuts', cursive;
+      color: var(--light);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
     }
 
     .social-links a:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px #0ff;
-      background: #08f;
+      color: var(--primary);
+      transform: translateY(-5px);
     }
 
-    .developer {
-      margin-top: 15px;
+    .copyright {
+      opacity: 0.7;
       font-size: 0.9rem;
-      color: yellow;
     }
 
-    .developer span {
-      display: block;
-      font-size: 1.8rem;
-      font-family: 'Bonheur Royale', cursive;
-      color: red;
-      text-shadow: 0 0 10px red, 0 0 20px red;
-      margin-top: 5px;
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInDown {
+      from { 
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from { 
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .hero {
+        padding: 8rem 1rem 3rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .search-container {
+        padding: 1.5rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>PAK SIM DATA</h1>
-    <input type="text" id="number" placeholder="Enter mobile number" required />
-    <button onclick="fetchData()">Search</button>
-    <div id="responseBox" class="result"></div>
-    <button id="shareButton" class="share-btn" onclick="shareWhatsApp()">📲 Share on WhatsApp</button>
-  </div>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <i class="fas fa-sim-card" style="font-size: 2rem; color: var(--primary);"></i>
+      <span class="logo-text">BLACK WORLD</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="https://whatsapp.com/channel/0029VaqyldOC6ZvZ6uSVmg2q" target="_blank">Channel</a>
+      <a href="https://wa.me/923058190234" target="_blank">Contact</a>
+    </nav>
+  </header>
 
-  <div class="footer">
-    <h2>Join Our Channels</h2>
-    <div class="social-links">
-      <a href="https://t.me/TECHBYHUZII" target="_blank">Telegram</a>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <h1 class="animate__animated animate__fadeInDown">SIM DATA CHECKER</h1>
+    <p class="animate__animated animate__fadeIn">Check any Pakistan SIM owner details instantly with our powerful database</p>
+    
+    <div class="search-container animate__animated animate__fadeInUp">
+      <div class="search-box">
+        <div class="input-group">
+          <i class="fas fa-mobile-alt"></i>
+          <input type="text" id="searchInput" placeholder="Enter Mobile Number (e.g., 03001234567)" maxlength="11">
+        </div>
+        <button class="btn" id="searchBtn"><i class="fas fa-search"></i> Check SIM Data</button>
+      </div>
+    </div>
+
+    <div class="results" id="results">
+      <div class="result-item">
+        <span class="result-label">Mobile Number:</span>
+        <span class="result-value" id="mobileNumber">-</span>
+      </div>
+      <div class="result-item">
+        <span class="result-label">Name:</span>
+        <span class="result-value" id="name">-</span>
+      </div>
+      <div class="result-item">
+        <span class="result-label">CNIC:</span>
+        <span class="result-value" id="cnic">-</span>
+      </div>
+      <div class="result-item">
+        <span class="result-label">Address:</span>
+        <span class="result-value" id="address">-</span>
+      </div>
+      <div class="result-item">
+        <span class="result-label">Operator:</span>
+        <span class="result-value" id="operator">-</span>
+      </div>
+      <p class="error-message" id="errorMsg"></p>
+    </div>
+
+    <div class="share-buttons" id="shareButtons">
+      <a href="#" class="share-btn whatsapp-btn" id="whatsappShare">
+        <i class="fab fa-whatsapp"></i> Share on WhatsApp
+      </a>
+      <a href="#" class="share-btn telegram-btn" id="telegramShare">
+        <i class="fab fa-telegram"></i> Share on Telegram
+      </a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <h2 class="section-title animate__animated animate__fadeIn">OUR SERVICES</h2>
+    <div class="features-grid">
+      <div class="feature-card animate__animated animate__fadeInUp">
+        <div class="feature-icon">
+          <i class="fas fa-database"></i>
+        </div>
+        <h3 class="feature-title">Massive Database</h3>
+        <p class="feature-desc">Access to millions of Pakistan SIM records with regular updates to ensure accuracy.</p>
+      </div>
+      <div class="feature-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+        <div class="feature-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h3 class="feature-title">Instant Results</h3>
+        <p class="feature-desc">Get SIM owner details in seconds with our high-speed API connection.</p>
+      </div>
+      <div class="feature-card animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+        <div class="feature-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3 class="feature-title">Secure & Private</h3>
+        <p class="feature-desc">Your searches are encrypted and never stored in our systems.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">BLACK WORLD</div>
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#features">Services</a>
       <a href="https://whatsapp.com/channel/0029VaqyldOC6ZvZ6uSVmg2q" target="_blank">WhatsApp Channel</a>
-      <a href="https://wa.me/923058190234" target="_blank">WhatsApp Me</a>
+      <a href="https://t.me/TECHBYHUZII" target="_blank">Telegram</a>
+      <a href="https://wa.me/923058190234" target="_blank">Contact</a>
     </div>
-    <div class="developer">
-      DEVELOPER:
-      <span>BLACK WORLD OFFICIAL</span>
+    <div class="social-links">
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
     </div>
-  </div>
+    <p class="copyright">© 2023 BLACK WORLD. All rights reserved.</p>
+  </footer>
 
   <script>
-    async function fetchData() {
-      const number = document.getElementById("number").value.trim();
-      const responseBox = document.getElementById("responseBox");
-      const shareButton = document.getElementById("shareButton");
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchBtn = document.getElementById('searchBtn');
+      const searchInput = document.getElementById('searchInput');
+      const results = document.getElementById('results');
+      const errorMsg = document.getElementById('errorMsg');
+      const shareButtons = document.getElementById('shareButtons');
+      const whatsappShare = document.getElementById('whatsappShare');
+      const telegramShare = document.getElementById('telegramShare');
 
-      if (!number) {
-        alert("Please enter a phone number.");
-        return;
-      }
+      // Result elements
+      const mobileNumber = document.getElementById('mobileNumber');
+      const name = document.getElementById('name');
+      const cnic = document.getElementById('cnic');
+      const address = document.getElementById('address');
+      const operator = document.getElementById('operator');
 
-      const url = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://paksimdatadevapi.free.nf/simownerdetail.php?phone_number=${number}`)}`;
+      searchBtn.addEventListener('click', fetchSimData);
+      searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') fetchSimData();
+      });
 
-      try {
-        const res = await fetch(url);
-        const json = await res.json();
-        const apiData = JSON.parse(json.contents);
-
-        if (apiData.status === "success" && Array.isArray(apiData.data) && apiData.data.length > 0) {
-          const user = apiData.data[0];
-          const content = `
-📞 Mobile: <span class="plain">${user.Mobile || "Not found - contact us 923058190234"}</span>
-👤 Name: ${user.Name || "Not found - contact us 923058190234"}
-🆔 CNIC: <span class="plain">${user.CNIC || "Not found - contact us 923058190234"}</span>
-📍 Address: ${user.Address || "Not found - contact us 923058190234"}
-📶 Operator: ${user.Operator || "Not found - contact us 923058190234"}
-          `;
-          responseBox.innerHTML = content;
-          responseBox.style.display = "block";
-          shareButton.style.display = "inline-block";
-        } else {
-          responseBox.innerHTML = `<p style="color: yellow;">Data Not Found</p>`;
-          responseBox.style.display = "block";
-          shareButton.style.display = "none";
+      async function fetchSimData() {
+        const number = searchInput.value.trim();
+        
+        // Validate number
+        if (!number || number.length !== 11 || !number.startsWith('03')) {
+          errorMsg.textContent = 'Please enter a valid Pakistan mobile number (e.g., 03001234567)';
+          results.classList.remove('show');
+          shareButtons.classList.remove('show');
+          return;
         }
-      } catch (e) {
-        responseBox.innerHTML = `<p style="color: red;">Error fetching data.</p>`;
-        responseBox.style.display = "block";
-        shareButton.style.display = "none";
-      }
-    }
 
-    function shareWhatsApp() {
-      const responseBox = document.getElementById("responseBox");
-      const text = encodeURIComponent(responseBox.innerText);
-      const url = `https://wa.me/?text=${text}`;
-      window.open(url, '_blank');
-    }
+        // Show loading state
+        searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+        searchBtn.disabled = true;
+        errorMsg.textContent = '';
+        
+        try {
+          // Call the API
+          const response = await fetch(`https://blackworldsim-api.vercel.app/api/sim-info?number=${number}`);
+          const data = await response.json();
+          
+          if (!response.ok) {
+            throw new Error(data.message || 'Failed to fetch data');
+          }
+          
+          // Display results
+          displayResults(data);
+        } catch (error) {
+          console.error('Error:', error);
+          errorMsg.textContent = error.message || 'Failed to fetch data. Please try again later.';
+          results.classList.remove('show');
+          shareButtons.classList.remove('show');
+        } finally {
+          searchBtn.innerHTML = '<i class="fas fa-search"></i> Check SIM Data';
+          searchBtn.disabled = false;
+        }
+      }
+
+      function displayResults(data) {
+        if (data.status === "success" && data.data && data.data.length > 0) {
+          const simData = data.data[0];
+          
+          mobileNumber.textContent = simData.Mobile || 'Not available';
+          name.textContent = simData.Name || 'Not available';
+          cnic.textContent = simData.CNIC || 'Not available';
+          address.textContent = simData.Address || 'Not available';
+          operator.textContent = simData.Operator || 'Not available';
+          
+          // Prepare share message
+          const shareText = `📱 SIM Data Results:\n\n` +
+                           `Number: ${simData.Mobile}\n` +
+                           `Name: ${simData.Name}\n` +
+                           `CNIC: ${simData.CNIC}\n` +
+                           `Address: ${simData.Address}\n` +
+                           `Operator: ${simData.Operator}\n\n` +
+                           `Checked via BLACK WORLD SIM Database`;
+          
+          // Set share links
+          whatsappShare.href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+          telegramShare.href = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(shareText)}`;
+          
+          // Show results and share buttons
+          results.classList.add('show');
+          shareButtons.classList.add('show');
+          errorMsg.textContent = '';
+        } else {
+          errorMsg.textContent = data.message || 'No data found for this number.';
+          results.classList.remove('show');
+          shareButtons.classList.remove('show');
+        }
+      }
+    });
   </script>
 </body>
-</html>
+          </html>
